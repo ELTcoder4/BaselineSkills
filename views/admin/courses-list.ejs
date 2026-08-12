@@ -1,0 +1,30 @@
+<%- include('partials/head') %>
+
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+  <h1 style="font-size:1.6rem;margin:0">Courses</h1>
+  <a href="/admin/courses/new" class="btn btn-gold">+ New course</a>
+</div>
+
+<table class="admin-table">
+  <thead><tr><th>Title</th><th>Category</th><th>Price</th><th>Discount</th><th>Sessions</th><th>Status</th><th>Actions</th></tr></thead>
+  <tbody>
+    <% courses.forEach(c => { %>
+    <tr>
+      <td><strong><%= c.title %></strong></td>
+      <td><%= c.category %></td>
+      <td>$<%= (c.priceCents/100).toFixed(2) %></td>
+      <td><%= c.discountPercent || 0 %>%</td>
+      <td><%= (c.sessions||[]).length %></td>
+      <td><span class="badge <%= c.published?'badge-published':'badge-draft' %>"><%= c.published?'Published':'Draft' %></span></td>
+      <td class="admin-actions">
+        <a href="/admin/courses/<%= c.id %>/edit" class="btn btn-outline btn-sm">Edit</a>
+        <form method="POST" action="/admin/courses/<%= c.id %>/toggle-published" style="display:inline"><button class="btn btn-outline btn-sm" type="submit"><%= c.published?'Unpublish':'Publish' %></button></form>
+        <form method="POST" action="/admin/courses/<%= c.id %>/delete" style="display:inline" onsubmit="return confirm('Delete this course permanently?')"><button class="btn btn-outline btn-sm" type="submit" style="color:#b91c1c;border-color:#fecaca">Delete</button></form>
+      </td>
+    </tr>
+    <% }) %>
+    <% if (courses.length===0) { %><tr><td colspan="7" style="color:var(--muted)">No courses yet — create your first one.</td></tr><% } %>
+  </tbody>
+</table>
+
+<%- include('partials/foot') %>

@@ -1,0 +1,41 @@
+<%- include('partials/head') %>
+
+<h1 style="font-size:1.6rem">Dashboard</h1>
+
+<div class="stat-cards">
+  <div class="stat-card"><div class="num"><%= courseCount %></div><div class="label">Total courses (<%= publishedCount %> published)</div></div>
+  <div class="stat-card"><div class="num"><%= registrationCount %></div><div class="label">Registrations</div></div>
+  <div class="stat-card"><div class="num">$<%= revenueDisplay %></div><div class="label">Recorded revenue</div></div>
+  <div class="stat-card"><div class="num"><%= recentInquiries.length %></div><div class="label">Recent inquiries</div></div>
+</div>
+
+<h3>Recent registrations</h3>
+<table class="admin-table">
+  <thead><tr><th>Name</th><th>Course</th><th>Session</th><th>Amount</th><th>Status</th><th>When</th></tr></thead>
+  <tbody>
+    <% recentRegistrations.forEach(r => { %>
+    <tr>
+      <td><%= r.name %><br><span style="color:var(--muted);font-size:.8rem"><%= r.email %></span></td>
+      <td><%= r.courseTitle %></td>
+      <td><%= r.sessionStartDate %></td>
+      <td><%= r.currency %> <%= (r.priceCentsCharged/100).toFixed(2) %></td>
+      <td><span class="badge <%= r.status==='confirmed'?'badge-confirmed':'badge-pending' %>"><%= r.status %></span></td>
+      <td><%= new Date(r.createdAt).toLocaleString() %></td>
+    </tr>
+    <% }) %>
+    <% if (recentRegistrations.length===0) { %><tr><td colspan="6" style="color:var(--muted)">No registrations yet.</td></tr><% } %>
+  </tbody>
+</table>
+
+<h3 style="margin-top:32px">Recent inquiries</h3>
+<table class="admin-table">
+  <thead><tr><th>Name</th><th>Type</th><th>Email</th><th>When</th></tr></thead>
+  <tbody>
+    <% recentInquiries.forEach(i => { %>
+    <tr><td><%= i.name %></td><td><%= i.type %></td><td><%= i.email %></td><td><%= new Date(i.createdAt).toLocaleString() %></td></tr>
+    <% }) %>
+    <% if (recentInquiries.length===0) { %><tr><td colspan="4" style="color:var(--muted)">No inquiries yet.</td></tr><% } %>
+  </tbody>
+</table>
+
+<%- include('partials/foot') %>

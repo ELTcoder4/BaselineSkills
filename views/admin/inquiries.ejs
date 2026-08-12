@@ -1,0 +1,22 @@
+<%- include('partials/head') %>
+
+<h1 style="font-size:1.6rem">Inquiries</h1>
+
+<table class="admin-table">
+  <thead><tr><th>Name</th><th>Type</th><th>Email</th><th>Company</th><th>Message</th><th>When</th></tr></thead>
+  <tbody>
+    <% inquiries.forEach(i => { %>
+    <tr>
+      <td><%= i.name %></td>
+      <td><span class="pill"><%= i.type %></span></td>
+      <td><%= i.email %></td>
+      <td><%= i.company || '—' %></td>
+      <td style="max-width:320px"><%= i.message %></td>
+      <td><%= new Date(i.createdAt).toLocaleString() %></td>
+    </tr>
+    <% }) %>
+    <% if (inquiries.length===0) { %><tr><td colspan="6" style="color:var(--muted)">No inquiries yet.</td></tr><% } %>
+  </tbody>
+</table>
+
+<%- include('partials/foot') %>

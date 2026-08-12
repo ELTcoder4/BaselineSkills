@@ -1,0 +1,26 @@
+<%- include('partials/head') %>
+
+<h1 style="font-size:1.6rem">Registrations</h1>
+
+<table class="admin-table">
+  <thead><tr><th>Name</th><th>Email</th><th>Course</th><th>Session</th><th>Company</th><th>Amount</th><th>Status</th><th>Registered</th></tr></thead>
+  <tbody>
+    <% registrations.forEach(r => { %>
+    <tr>
+      <td><%= r.name %></td>
+      <td><%= r.email %></td>
+      <td><%= r.courseTitle %></td>
+      <td><%= r.sessionStartDate %> (<%= r.deliveryMode %>)</td>
+      <td><%= r.company || '—' %></td>
+      <td><%= r.currency %> <%= (r.priceCentsCharged/100).toFixed(2) %></td>
+      <td><span class="badge <%= r.status==='confirmed'?'badge-confirmed':'badge-pending' %>"><%= r.status %></span></td>
+      <td><%= new Date(r.createdAt).toLocaleString() %></td>
+    </tr>
+    <% }) %>
+    <% if (registrations.length===0) { %><tr><td colspan="8" style="color:var(--muted)">No registrations yet.</td></tr><% } %>
+  </tbody>
+</table>
+
+<p class="form-hint" style="margin-top:16px">This data is stored in <code>data/registrations.json</code> on the server.</p>
+
+<%- include('partials/foot') %>

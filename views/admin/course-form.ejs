@@ -1,0 +1,76 @@
+<%- include('partials/head') %>
+
+<h1 style="font-size:1.6rem"><%= mode === 'new' ? 'New course' : 'Edit course' %></h1>
+
+<form method="POST" action="<%= mode === 'new' ? '/admin/courses/new' : `/admin/courses/${course.id}/edit` %>" class="card" style="max-width:760px">
+  <div class="form-row">
+    <div class="form-field"><label>Title *</label><input type="text" name="title" required value="<%= course ? course.title : '' %>"></div>
+    <div class="form-field">
+      <label>Category *</label>
+      <select name="category" required>
+        <% ["Requirements Engineering","Systems Engineering","Business Analysis","Automotive"].forEach(cat => { %>
+          <option value="<%= cat %>" <%= course && course.category===cat ? 'selected' : '' %>><%= cat %></option>
+        <% }) %>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-field"><label>Short summary (shown on cards) *</label><input type="text" name="summary" required value="<%= course ? course.summary : '' %>"></div>
+  <div class="form-field"><label>Full description *</label><textarea name="description" rows="5" required><%= course ? course.description : '' %></textarea></div>
+  <div class="form-field"><label>Learning outcomes (one per line)</label><textarea name="outcomes" rows="4"><%= course && course.outcomes ? course.outcomes.join('\n') : '' %></textarea></div>
+  <div class="form-field"><label>Who should attend (one per line)</label><textarea name="audience" rows="3"><%= course && course.audience ? course.audience.join('\n') : '' %></textarea></div>
+
+  <div class="form-row">
+    <div class="form-field"><label>Duration (days) *</label><input type="number" name="durationDays" min="1" required value="<%= course ? course.durationDays : 1 %>"></div>
+    <div class="form-field"><label>Currency</label><input type="text" name="currency" value="<%= course ? course.currency : 'USD' %>"></div>
+  </div>
+
+  <div class="form-field">
+    <label>Delivery modes</label>
+    <% ["Live Online","Classroom (India)","Corporate On-site","Private Cohort"].forEach(m => { %>
+      <div class="checkbox-row"><input type="checkbox" name="deliveryModes" value="<%= m %>" <%= course && course.deliveryModes && course.deliveryModes.includes(m) ? 'checked' : '' %>> <label style="margin:0;font-weight:400"><%= m %></label></div>
+    <% }) %>
+  </div>
+
+  <div class="form-row">
+    <div class="form-field"><label>Price (USD, before discount) *</label><input type="number" step="0.01" name="price" required value="<%= course ? (course.priceCents/100).toFixed(2) : '' %>"></div>
+    <div class="form-field"><label>Discount (%)</label><input type="number" name="discountPercent" min="0" max="100" value="<%= course ? (course.discountPercent||0) : 0 %>"></div>
+  </div>
+
+  <div class="checkbox-row" style="margin-bottom:14px"><input type="checkbox" name="certification" <%= course && course.certification ? 'checked' : '' %>> <label style="margin:0;font-weight:400">Leads to a certification</label></div>
+  <div class="checkbox-row" style="margin-bottom:14px"><input type="checkbox" name="published" <%= !course || course.published ? 'checked' : '' %>> <label style="margin:0;font-weight:400">Published (visible on the public site)</label></div>
+
+  <h4>Sessions (dates &amp; times)</h4>
+  <div id="sessions-wrap">
+    <% const sessions = (course && course.sessions && course.sessions.length) ? course.sessions : [{startDate:'',mode:'Live Online',seatsLeft:''}]; %>
+    <% sessions.forEach(s => { %>
+      <div class="form-row session-row" style="grid-template-columns:1fr 1fr 100px auto;align-items:end">
+        <div class="form-field"><label>Start date</label><input type="text" name="sessionStartDate" placeholder="2026-09-11 or 'On Demand'" value="<%= s.startDate %>"></div>
+        <div class="form-field"><label>Mode</label><input type="text" name="sessionMode" value="<%= s.mode %>"></div>
+        <div class="form-field"><label>Seats</label><input type="number" name="sessionSeats" value="<%= s.seatsLeft==null ? '' : s.seatsLeft %>"></div>
+        <button type="button" class="btn btn-outline btn-sm" onclick="this.closest('.session-row').remove()" style="margin-bottom:18px">Remove</button>
+      </div>
+    <% }) %>
+  </div>
+  <button type="button" class="btn btn-outline btn-sm" onclick="addSessionRow()">+ Add session</button>
+
+  <div style="margin-top:26px"><button type="submit" class="btn btn-navy btn-lg">Save course</button></div>
+</form>
+
+<script>
+function addSessionRow(){
+  const wrap = document.getElementById('sessions-wrap');
+  const row = document.createElement('div');
+  row.className = 'form-row session-row';
+  row.style.gridTemplateColumns = '1fr 1fr 100px auto';
+  row.style.alignItems = 'end';
+  row.innerHTML = `
+    <div class="form-field"><label>Start date</label><input type="text" name="sessionStartDate" placeholder="2026-09-11 or 'On Demand'"></div>
+    <div class="form-field"><label>Mode</label><input type="text" name="sessionMode" value="Live Online"></div>
+    <div class="form-field"><label>Seats</label><input type="number" name="sessionSeats"></div>
+    <button type="button" class="btn btn-outline btn-sm" onclick="this.closest('.session-row').remove()" style="margin-bottom:18px">Remove</button>`;
+  wrap.appendChild(row);
+}
+</script>
+
+<%- include('partials/foot') %>

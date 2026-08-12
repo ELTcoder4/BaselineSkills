@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+
+<section class="section-tight" style="background:#fff;border-bottom:1px solid var(--line)">
+  <div class="container">
+    <span class="eyebrow">All Courses</span>
+    <h1 style="font-size:2.1rem">Find your next certification or skills course.</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="path-tabs">
+      <% categories.forEach(cat => { %>
+        <a href="/courses?category=<%= encodeURIComponent(cat) %>" class="path-tab <%= cat===activeCategory?'active':'' %>" style="text-decoration:none;display:inline-block"><%= cat %></a>
+      <% }) %>
+    </div>
+
+    <% if (courses.length === 0) { %>
+      <p class="lead">No courses in this category yet.</p>
+    <% } %>
+
+    <div class="grid-3">
+      <% courses.forEach(c => { %>
+        <div class="card">
+          <span class="tag"><%= c.category %></span>
+          <h3 style="margin-top:12px"><%= c.title %></h3>
+          <p style="color:var(--muted);font-size:.9rem;flex:1"><%= c.summary %></p>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin:10px 0">
+            <div class="price-now" style="font-size:1.3rem">$<%= ((c.priceCents*(1-(c.discountPercent||0)/100))/100).toFixed(0) %></div>
+            <% if(c.discountPercent){ %><span class="discount-badge"><%= c.discountPercent %>% OFF</span><% } %>
+          </div>
+          <div class="course-mini-ctas">
+            <a href="/courses/<%= c.slug %>" class="btn btn-outline btn-sm">Learn More</a>
+            <a href="/courses/<%= c.slug %>/register" class="btn btn-navy btn-sm">Register</a>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

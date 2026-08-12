@@ -1,0 +1,148 @@
+<%- include('partials/header') %>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div>
+      <span class="eyebrow" style="background:rgba(245,197,24,.2);color:#F5C518">Baseline Skills</span>
+      <h1>Master Requirements Engineering, Systems Engineering &amp; AI Skills That Drive Better Products</h1>
+      <p class="lead">Baseline Skills helps professionals and organizations build practical, industry-recognized capabilities through expert-led certification training, corporate programs, and hands-on learning experiences.</p>
+      <div class="hero-ctas">
+        <a href="/courses" class="btn btn-gold btn-lg">Explore Courses</a>
+        <a href="/contact" class="btn btn-outline-light btn-lg">Talk to an Expert</a>
+      </div>
+      <div class="hero-metrics">
+        <div class="metric"><div class="metric-num">2,200+</div><div class="metric-label">CPRE professionals trained</div></div>
+        <div class="metric"><div class="metric-num">17+ yrs</div><div class="metric-label">training experience</div></div>
+        <div class="metric"><div class="metric-num">Corporate</div><div class="metric-label">programs for leading engineering orgs</div></div>
+        <div class="metric"><div class="metric-num">Live &amp; Online</div><div class="metric-label">instructor-led options</div></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <span class="tag">Featured</span>
+      <h3>IREB CPRE Foundation Level</h3>
+      <p style="color:var(--muted);font-size:.9rem">The internationally recognized starting point for a career in requirements engineering.</p>
+      <a href="/courses/cpre-foundation-level" class="btn btn-navy btn-block">View Course</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="paths">
+  <div class="container">
+    <div class="section-hdr">
+      <span class="eyebrow">Featured Learning Paths</span>
+      <h2>Find the right path for where you are now.</h2>
+    </div>
+    <div class="path-tabs">
+      <% Object.keys(byCategory).forEach((cat, i) => { %>
+        <button class="path-tab <%= i===0?'active':'' %>" onclick="showPath('<%= cat.replace(/\s+/g,'-') %>', this)"><%= cat %></button>
+      <% }) %>
+    </div>
+    <% Object.keys(byCategory).forEach((cat, i) => { %>
+      <div class="path-panel <%= i===0?'active':'' %>" id="path-<%= cat.replace(/\s+/g,'-') %>">
+        <% byCategory[cat].forEach(c => { %>
+          <div class="course-mini">
+            <span class="tag"><%= c.certification ? 'Certification' : 'Skills Course' %></span>
+            <h4><%= c.title %></h4>
+            <p style="font-size:.85rem;color:var(--muted);margin-bottom:0"><%= c.summary %></p>
+            <div class="price">$<%= (c.priceCents/100).toFixed(0) %><% if(c.discountPercent){ %> <span style="font-size:.8rem;color:var(--muted);font-weight:400">(<%= c.discountPercent %>% off)</span><% } %></div>
+            <div class="course-mini-ctas">
+              <a href="/courses/<%= c.slug %>" class="btn btn-outline btn-sm">Learn More</a>
+              <a href="/courses/<%= c.slug %>#sessions" class="btn btn-navy btn-sm">Upcoming Batches</a>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% }) %>
+  </div>
+</section>
+
+<section class="section" style="background:#fff">
+  <div class="container">
+    <div class="section-hdr center">
+      <span class="eyebrow">Why Baseline Skills</span>
+      <h2>A premium, standards-aligned way to build engineering capability.</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item"><div class="card-icon">&#9776;</div><h4 style="font-size:1rem">Industry-aligned curriculum</h4><p style="font-size:.85rem;color:var(--muted)">Based on IREB, IIBA, PMI, INCOSE, ISO standards, and current engineering practice.</p></div>
+      <div class="why-item"><div class="card-icon">&#9733;</div><h4 style="font-size:1rem">Expert trainers</h4><p style="font-size:.85rem;color:var(--muted)">Senior practitioners with real project experience, not just slide decks.</p></div>
+      <div class="why-item"><div class="card-icon">&#9998;</div><h4 style="font-size:1rem">Hands-on learning</h4><p style="font-size:.85rem;color:var(--muted)">Practical exercises, templates, and real case studies throughout.</p></div>
+      <div class="why-item"><div class="card-icon">&#9776;</div><h4 style="font-size:1rem">Flexible delivery</h4><p style="font-size:.85rem;color:var(--muted)">Classroom, live online, and self-paced learning options.</p></div>
+      <div class="why-item"><div class="card-icon">&#9881;</div><h4 style="font-size:1rem">Corporate customization</h4><p style="font-size:.85rem;color:var(--muted)">Tailored programs designed around your organization's needs.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-hdr">
+      <span class="eyebrow">Upcoming Programs</span>
+      <h2>Pick your next session.</h2>
+    </div>
+    <div class="table-wrap">
+      <table class="programs">
+        <thead><tr><th>Course</th><th>Mode</th><th>Start Date</th><th>Duration</th><th></th></tr></thead>
+        <tbody>
+          <% upcoming.forEach(s => { %>
+          <tr>
+            <td><strong><%= s.course.title %></strong></td>
+            <td><span class="pill"><%= s.mode %></span></td>
+            <td><%= s.startDate %></td>
+            <td><%= s.course.durationDays %> Day<%= s.course.durationDays>1?'s':'' %></td>
+            <td><a href="/courses/<%= s.course.slug %>/register" class="btn btn-navy btn-sm">Register</a></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:#fff">
+  <div class="container">
+    <div class="section-hdr center">
+      <span class="eyebrow">Client &amp; Community Trust</span>
+      <h2>Trusted by engineering teams that can't afford to get requirements wrong.</h2>
+    </div>
+    <div class="grid-2">
+      <div class="testimonial"><p>&ldquo;The CPRE training was highly practical and immediately applicable to our engineering projects.&rdquo;</p><div class="testimonial-by">Engineering Lead, Automotive Industry</div></div>
+      <div class="testimonial"><p>&ldquo;The Systems Engineering program helped our team align better with ISO 15288 practices.&rdquo;</p><div class="testimonial-by">Program Manager, Embedded Systems Organization</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-hdr">
+      <span class="eyebrow">RE Pulse</span>
+      <h2>Free resources to sharpen your practice.</h2>
+    </div>
+    <div class="grid-4">
+      <div class="card"><h4 style="font-size:.95rem">How to Write Verifiable Requirements</h4></div>
+      <div class="card"><h4 style="font-size:.95rem">Requirements Review Checklist</h4></div>
+      <div class="card"><h4 style="font-size:.95rem">ASPICE Traceability Essentials</h4></div>
+      <div class="card"><h4 style="font-size:.95rem">MBSE Starter Guide</h4></div>
+    </div>
+    <div style="text-align:center;margin-top:28px"><a href="/resources" class="btn btn-outline">Visit RE Pulse &rarr;</a></div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <h2>Ready to build stronger engineering capabilities?</h2>
+    <div class="cta-band-btns">
+      <a href="/contact" class="btn btn-gold btn-lg">Schedule a Consultation</a>
+      <a href="/contact" class="btn btn-outline-light btn-lg">Download Training Catalogue</a>
+    </div>
+  </div>
+</section>
+
+<script>
+function showPath(id, btn){
+  document.querySelectorAll('.path-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.path-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('path-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+
+<%- include('partials/footer') %>

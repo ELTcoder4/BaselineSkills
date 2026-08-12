@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title><%= title %></title><link rel="icon" type="image/png" href="/img/favicon.png"><link rel="stylesheet" href="/css/style.css"></head>
+<body>
+<div class="admin-shell">
+  <aside class="admin-sidebar">
+    <div class="brand">Baseline Skills</div>
+    <a href="/admin" class="<%= currentPath==='/admin'?'active':'' %>">Dashboard</a>
+    <a href="/admin/courses" class="<%= currentPath.startsWith('/admin/courses')?'active':'' %>">Courses</a>
+    <a href="/admin/registrations" class="<%= currentPath==='/admin/registrations'?'active':'' %>">Registrations</a>
+    <a href="/admin/inquiries" class="<%= currentPath==='/admin/inquiries'?'active':'' %>">Inquiries</a>
+    <a href="/" target="_blank">View site &#8599;</a>
+    <a href="/admin/logout">Sign out</a>
+  </aside>
+  <main class="admin-main">
