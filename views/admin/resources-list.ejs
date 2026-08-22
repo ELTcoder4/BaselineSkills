@@ -1,0 +1,30 @@
+<%- include('partials/head') %>
+
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+  <h1 style="font-size:1.6rem;margin:0">Resources (RE Pulse)</h1>
+  <a href="/admin/resources/new" class="btn btn-gold">+ New resource</a>
+</div>
+
+<% if (typeof error !== 'undefined' && error) { %>
+  <div class="alert alert-error" style="margin-bottom:16px"><%= error %></div>
+<% } %>
+
+<table class="admin-table">
+  <thead><tr><th>Title</th><th>Category</th><th>Link</th><th>Actions</th></tr></thead>
+  <tbody>
+    <% resources.forEach(r => { %>
+    <tr>
+      <td><strong><%= r.title %></strong></td>
+      <td><%= r.category %></td>
+      <td><a href="<%= r.url %>" target="_blank" rel="noopener"><%= r.url %></a></td>
+      <td class="admin-actions">
+        <a href="/admin/resources/<%= r.id %>/edit" class="btn btn-outline btn-sm">Edit</a>
+        <form method="POST" action="/admin/resources/<%= r.id %>/delete" style="display:inline" onsubmit="return confirm('Delete this resource permanently?')"><button class="btn btn-outline btn-sm" type="submit" style="color:#b91c1c;border-color:#fecaca">Delete</button></form>
+      </td>
+    </tr>
+    <% }) %>
+    <% if (resources.length===0) { %><tr><td colspan="4" style="color:var(--muted)">No resources yet.</td></tr><% } %>
+  </tbody>
+</table>
+
+<%- include('partials/foot') %>

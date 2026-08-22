@@ -1,0 +1,53 @@
+[
+  {
+    "id": "reg_1786517041020_a2269d47",
+    "courseId": "cpre-fl",
+    "courseTitle": "IREB CPRE Foundation Level",
+    "name": "Alex Johnson",
+    "email": "alex.j@example.com",
+    "company": "Innovate Mobility",
+    "role": "Systems Architect",
+    "sessionStartDate": "2026-09-15",
+    "deliveryMode": "Live Online",
+    "notes": "Testing automated registration flow",
+    "priceCentsCharged": 76415,
+    "currency": "USD",
+    "status": "invoice_pending",
+    "createdAt": "2026-08-12T06:44:01.020Z",
+    "confirmedAt": "2026-08-12T06:44:01.022Z"
+  },
+  {
+    "id": "reg_1786517064572_52eb19ee",
+    "courseId": "cpre-fl",
+    "courseTitle": "IREB CPRE Foundation Level",
+    "name": "Alex Johnson",
+    "email": "alex.j@example.com",
+    "company": "Innovate Mobility",
+    "role": "Systems Architect",
+    "sessionStartDate": "2026-09-15",
+    "deliveryMode": "Live Online",
+    "notes": "Testing automated registration flow",
+    "priceCentsCharged": 76415,
+    "currency": "USD",
+    "status": "invoice_pending",
+    "createdAt": "2026-08-12T06:44:24.572Z",
+    "confirmedAt": "2026-08-12T06:44:24.574Z"
+  },
+  {
+    "id": "reg_1786518256335_70791e00",
+    "courseId": "cpre-fl",
+    "courseTitle": "IREB CPRE Foundation Level",
+    "name": "Alex Johnson",
+    "email": "alex.j@example.com",
+    "company": "Innovate Mobility",
+    "role": "Systems Architect",
+    "sessionStartDate": "2026-09-15",
+    "deliveryMode": "Live Online",
+    "notes": "Testing automated registration flow",
+    "priceCentsCharged": 76415,
+    "currency": "USD",
+    "status": "invoice_pending",
+    "createdAt": "2026-08-12T07:04:16.335Z",
+    "confirmedAt": "2026-08-12T07:04:16.338Z"
+  }
+]

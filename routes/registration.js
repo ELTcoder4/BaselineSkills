@@ -2,15 +2,16 @@ const express = require("express");
 const router = express.Router();
 const crypto = require("crypto");
 const store = require("../lib/store");
-const { sendMail, escapeHtml, sanitizeHeaderValue } = require("../lib/mailer");
+const { sendMail, escapeHtml } = require("../lib/mailer");
 const { newId } = require("../lib/id");
 const payments = require("../lib/payments");
-const { createIpRateLimiter } = require("../lib/security");
+const createRateLimiter = require("../lib/rate-limiter");
 
-const registrationLimiter = createIpRateLimiter({
-  windowMs: 60 * 1000,
+const regRateLimiter = createRateLimiter({
+  windowMs: 10 * 60 * 1000,
   max: 10,
-  message: "Too many submissions from this address. Please wait a minute and try again.",
+  keyPrefix: "course_reg",
+  message: "Too many registration requests. Please wait a few minutes before trying again.",
 });
 
 // ---- Registration form ----
@@ -21,7 +22,7 @@ router.get("/courses/:slug/register", (req, res) => {
 });
 
 // ---- Submit registration ----
-router.post("/courses/:slug/register", registrationLimiter, async (req, res) => {
+router.post("/courses/:slug/register", regRateLimiter, async (req, res) => {
   const course = store.findOne("courses", (c) => c.slug === req.params.slug && c.published);
   if (!course) return res.status(404).render("404", { title: "Course not found" });
 
@@ -95,11 +96,13 @@ async function finalizeRegistration(registrationId, opts = {}) {
     ? `<p><em>Payment processing isn't fully configured on this instance yet — this registration has been recorded as invoice-pending. Set PADDLE_API_KEY and PADDLE_CLIENT_TOKEN to enable live card payments via Paddle.</em></p>`
     : "";
 
+  const courseTitle = escapeHtml(course ? course.title : reg.courseTitle);
+
   await sendMail({
     to: process.env.ADMIN_EMAIL || "admin@baselineskills.example",
-    subject: `New registration — ${sanitizeHeaderValue(course ? course.title : reg.courseTitle)} (${sanitizeHeaderValue(reg.name)})`,
+    subject: `New registration — ${courseTitle.replace(/[\r\n]/g, "")} (${escapeHtml(reg.name).replace(/[\r\n]/g, "")})`,
     html: `<h2>New course registration</h2>
-      <p><strong>${escapeHtml(reg.name)}</strong> (${escapeHtml(reg.email)}) registered for <strong>${escapeHtml(course ? course.title : reg.courseTitle)}</strong>.</p>
+      <p><strong>${escapeHtml(reg.name)}</strong> (${escapeHtml(reg.email)}) registered for <strong>${courseTitle}</strong>.</p>
       <ul>
         <li>Company: ${escapeHtml(reg.company) || "n/a"}</li>
         <li>Role: ${escapeHtml(reg.role) || "n/a"}</li>
@@ -112,9 +115,9 @@ async function finalizeRegistration(registrationId, opts = {}) {
 
   await sendMail({
     to: reg.email,
-    subject: `You're registered — ${sanitizeHeaderValue(course ? course.title : reg.courseTitle)}`,
+    subject: `You're registered — ${courseTitle.replace(/[\r\n]/g, "")}`,
     html: `<h2>Thanks for registering, ${escapeHtml(reg.name)}!</h2>
-      <p>You're booked on <strong>${escapeHtml(course ? course.title : reg.courseTitle)}</strong>.</p>
+      <p>You're booked on <strong>${courseTitle}</strong>.</p>
       <ul>
         <li>Session: ${escapeHtml(reg.sessionStartDate)}</li>
         <li>Delivery mode: ${escapeHtml(reg.deliveryMode)}</li>
@@ -127,6 +130,7 @@ async function finalizeRegistration(registrationId, opts = {}) {
 
   return updated;
 }
+
 
 // ---- Landing page after the Paddle overlay closes (belt-and-suspenders alongside the webhook) ----
 router.get("/register/success", async (req, res) => {

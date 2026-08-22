@@ -2,7 +2,11 @@
 
 <h1 style="font-size:1.6rem"><%= mode === 'new' ? 'New course' : 'Edit course' %></h1>
 
-<form method="POST" action="<%= mode === 'new' ? '/admin/courses/new' : `/admin/courses/${course.id}/edit` %>" class="card" style="max-width:760px">
+<% if (typeof error !== 'undefined' && error) { %>
+  <div class="alert alert-error" style="margin-bottom:16px"><%= error %></div>
+<% } %>
+
+<form method="POST" action="<%= mode === 'new' ? '/admin/courses/new' : `/admin/courses/${course.id}/edit` %>" enctype="multipart/form-data" class="card" style="max-width:760px">
   <div class="form-row">
     <div class="form-field"><label>Title *</label><input type="text" name="title" required value="<%= course ? course.title : '' %>"></div>
     <div class="form-field">
@@ -17,8 +21,39 @@
 
   <div class="form-field"><label>Short summary (shown on cards) *</label><input type="text" name="summary" required value="<%= course ? course.summary : '' %>"></div>
   <div class="form-field"><label>Full description *</label><textarea name="description" rows="5" required><%= course ? course.description : '' %></textarea></div>
-  <div class="form-field"><label>Learning outcomes (one per line)</label><textarea name="outcomes" rows="4"><%= course && course.outcomes ? course.outcomes.join('\n') : '' %></textarea></div>
+
+  <h4>Program description</h4>
+  <div class="form-field"><label>Why take this course</label><textarea name="whyTakeThisCourse" rows="3"><%= course ? course.whyTakeThisCourse : '' %></textarea></div>
+  <div class="form-field"><label>Learning objectives (one per line)</label><textarea name="outcomes" rows="4"><%= course && course.outcomes ? course.outcomes.join('\n') : '' %></textarea></div>
   <div class="form-field"><label>Who should attend (one per line)</label><textarea name="audience" rows="3"><%= course && course.audience ? course.audience.join('\n') : '' %></textarea></div>
+  <div class="form-field"><label>Prerequisites (one per line)</label><textarea name="prerequisites" rows="3" placeholder="e.g. No prior RE experience required"><%= course && course.prerequisites ? course.prerequisites.join('\n') : '' %></textarea></div>
+  <div class="form-field"><label>Format &amp; material</label><textarea name="formatAndMaterial" rows="3" placeholder="e.g. Live instructor-led sessions, printed workbook, recorded playback for 90 days"><%= course ? course.formatAndMaterial : '' %></textarea></div>
+  <div class="form-field"><label>What you'll receive (one per line)</label><textarea name="whatYoullReceive" rows="3" placeholder="e.g. Certificate of completion&#10;Course workbook (PDF)&#10;90-day access to recordings"><%= course && course.whatYoullReceive ? course.whatYoullReceive.join('\n') : '' %></textarea></div>
+  <div class="form-field"><label>Course outline link</label><input type="url" name="courseOutlineUrl" placeholder="https://... link to a detailed outline document" value="<%= course ? course.courseOutlineUrl : '' %>"></div>
+
+  <div class="form-field">
+    <label>Trainer</label>
+    <select name="trainerId">
+      <option value="">— No trainer assigned —</option>
+      <% trainers.forEach(t => { %>
+        <option value="<%= t.id %>" <%= course && course.trainerId===t.id ? 'selected' : '' %>><%= t.name %><%= t.title ? ' — '+t.title : '' %></option>
+      <% }) %>
+    </select>
+    <p class="form-hint"><a href="/admin/trainers/new" target="_blank">+ Add a new trainer</a> if they're not listed yet.</p>
+  </div>
+
+  <div class="form-field">
+    <label>Brochure (PDF)</label>
+    <input type="file" name="brochure" accept="application/pdf">
+    <% if (course && course.brochureFilename) { %>
+      <p class="form-hint">Current brochure: <a href="/brochure/<%= course.brochureFilename %>" target="_blank">view PDF</a> — upload a new file to replace it, or leave blank to keep it.</p>
+    <% } %>
+  </div>
+
+  <div class="form-field"><label>Course contents (one module per line, format: "Module name: topic 1, topic 2")</label>
+    <textarea name="curriculumRaw" rows="4" placeholder="Requirements Elicitation: Techniques, Stakeholder analysis, Workshops"><%= course && course.curriculum && course.curriculum.length ? course.curriculum.map(m => `${m.module}: ${m.topics.join(', ')}`).join('\n') : '' %></textarea>
+    <p class="form-hint">Leave blank to keep the existing course contents unchanged.</p>
+  </div>
 
   <div class="form-row">
     <div class="form-field"><label>Duration (days) *</label><input type="number" name="durationDays" min="1" required value="<%= course ? course.durationDays : 1 %>"></div>
@@ -42,10 +77,13 @@
 
   <h4>Sessions (dates &amp; times)</h4>
   <div id="sessions-wrap">
-    <% const sessions = (course && course.sessions && course.sessions.length) ? course.sessions : [{startDate:'',mode:'Live Online',seatsLeft:''}]; %>
+    <% const sessions = (course && course.sessions && course.sessions.length) ? course.sessions : [{startDate:'',endDate:'',timeFrom:'',timeTo:'',mode:'Live Online',seatsLeft:''}]; %>
     <% sessions.forEach(s => { %>
-      <div class="form-row session-row" style="grid-template-columns:1fr 1fr 100px auto;align-items:end">
+      <div class="form-row session-row" style="grid-template-columns:1fr 1fr 90px 90px 1fr 80px auto;align-items:end">
         <div class="form-field"><label>Start date</label><input type="text" name="sessionStartDate" placeholder="2026-09-11 or 'On Demand'" value="<%= s.startDate %>"></div>
+        <div class="form-field"><label>End date</label><input type="text" name="sessionEndDate" placeholder="2026-09-14" value="<%= s.endDate || '' %>"></div>
+        <div class="form-field"><label>Time from</label><input type="time" name="sessionTimeFrom" value="<%= s.timeFrom || '' %>"></div>
+        <div class="form-field"><label>Time to</label><input type="time" name="sessionTimeTo" value="<%= s.timeTo || '' %>"></div>
         <div class="form-field"><label>Mode</label><input type="text" name="sessionMode" value="<%= s.mode %>"></div>
         <div class="form-field"><label>Seats</label><input type="number" name="sessionSeats" value="<%= s.seatsLeft==null ? '' : s.seatsLeft %>"></div>
         <button type="button" class="btn btn-outline btn-sm" onclick="this.closest('.session-row').remove()" style="margin-bottom:18px">Remove</button>
@@ -62,10 +100,13 @@ function addSessionRow(){
   const wrap = document.getElementById('sessions-wrap');
   const row = document.createElement('div');
   row.className = 'form-row session-row';
-  row.style.gridTemplateColumns = '1fr 1fr 100px auto';
+  row.style.gridTemplateColumns = '1fr 1fr 90px 90px 1fr 80px auto';
   row.style.alignItems = 'end';
   row.innerHTML = `
     <div class="form-field"><label>Start date</label><input type="text" name="sessionStartDate" placeholder="2026-09-11 or 'On Demand'"></div>
+    <div class="form-field"><label>End date</label><input type="text" name="sessionEndDate" placeholder="2026-09-14"></div>
+    <div class="form-field"><label>Time from</label><input type="time" name="sessionTimeFrom"></div>
+    <div class="form-field"><label>Time to</label><input type="time" name="sessionTimeTo"></div>
     <div class="form-field"><label>Mode</label><input type="text" name="sessionMode" value="Live Online"></div>
     <div class="form-field"><label>Seats</label><input type="number" name="sessionSeats"></div>
     <button type="button" class="btn btn-outline btn-sm" onclick="this.closest('.session-row').remove()" style="margin-bottom:18px">Remove</button>`;
