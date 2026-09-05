@@ -1,0 +1,110 @@
+[
+  {
+    "to": "admin@baselineskills.com",
+    "from": "Baseline Skills <no-reply@baselineskills.com>",
+    "subject": "New corporate training inquiry — Acme Industries",
+    "html": "<p><strong>Acme Corp Lead</strong> at <strong>Acme Industries</strong> (training@acme.example, 555-0199) requested corporate training info.</p>\n           <p>Team size: 15-25</p>\n           <p>Message: We need an in-house CPRE training session for our systems team.</p>",
+    "delivered": false,
+    "reason": "SMTP not configured",
+    "loggedAt": "2026-08-12T06:44:00.999Z"
+  },
+  {
+    "to": "admin@baselineskills.com",
+    "from": "Baseline Skills <no-reply@baselineskills.com>",
+    "subject": "New contact form message — Jane Smith",
+    "html": "<p><strong>Jane Smith</strong> (jane@example.com) sent a message.</p>\n           <p>Company: Tech Solutions · Role: Lead Requirements Engineer · Course interest: IREB CPRE Advanced Level · Team size: 1-5 · Preferred mode: Live Online</p>\n           <p>Interested in upcoming schedule for Advanced Level.</p>",
+    "delivered": false,
+    "reason": "SMTP not configured",
+    "loggedAt": "2026-08-12T06:44:01.005Z"
+  },
+  {
+    "to": "admin@baselineskills.com",
+    "from": "Baseline Skills <no-reply@baselineskills.com>",
+    "subject": "New registration — IREB CPRE Foundation Level (Alex Johnson)",
+    "html": "<h2>New course registration</h2>\n      <p><strong>Alex Johnson</strong> (alex.j@example.com) registered for <strong>IREB CPRE Foundation Level</strong>.</p>\n      <ul>\n        <li>Company: Innovate Mobility</li>\n        <li>Role: Systems Architect</li>\n        <li>Session: 2026-09-15 (Live Online)</li>\n        <li>Amount: USD 764.15</li>\n        <li>Status: invoice_pending</li>\n      </ul>\n      <p><em>Payment processing isn't fully configured on this instance yet — this registration has been recorded as invoice-pending. Set PADDLE_API_KEY and PADDLE_CLIENT_TOKEN to enable live card payments via Paddle.</em></p>",
+    "delivered": false,
+    "reason": "SMTP not configured",
+    "loggedAt": "2026-08-12T06:44:01.024Z"
+  },
+  {
+    "to": "alex.j@example.com",
+    "from": "Baseline Skills <no-reply@baselineskills.com>",
+    "subject": "You're registered — IREB CPRE Foundation Level",
+    "html": "<h2>Thanks for registering, Alex Johnson!</h2>\n      <p>You're booked on <strong>IREB CPRE Foundation Level</strong>.</p>\n      <ul>\n        <li>Session: 2026-09-15</li>\n        <li>Delivery mode: Live Online</li>\n        <li>Amount: USD 764.15</li>\n      </ul>\n      <p><em>Payment processing isn't fully configured on this instance yet — this registration has been recorded as invoice-pending. Set PADDLE_API_KEY and PADDLE_CLIENT_TOKEN to enable live card payments via Paddle.</em></p>\n      <p>We'll be in touch with joining instructions closer to the session date.</p>\n      <p>— The Baseline Skills team</p>",
+    "delivered": false,
+    "reason": "SMTP not configured",
+    "loggedAt": "2026-08-12T06:44:01.025Z"
+  },
+  {
+    "to": "admin@baselineskills.com",
+    "from": "Baseline Skills <no-reply@baselineskills.com>",
+    "subject": "New corporate training inquiry — Acme Industries",
+    "html": "<p><strong>Acme Corp Lead</strong> at <strong>Acme Industries</strong> (training@acme.example, 555-0199) requested corporate training info.</p>\n           <p>Team size: 15-25</p>\n           <p>Message: We need an in-house CPRE training session for our systems team.</p>",
+    "delivered": false,
+    "reason": "SMTP not configured",
+    "loggedAt": "2026-08-12T06:44:24.556Z"
+  },
+  {
+    "to": "admin@baselineskills.com",
+    "from": "Baseline Skills <no-reply@baselineskills.com>",
+    "subject": "New contact form message — Jane Smith",
+    "html": "<p><strong>Jane Smith</strong> (jane@example.com) sent a message.</p>\n           <p>Company: Tech Solutions · Role: Lead Requirements Engineer · Course interest: IREB CPRE Advanced Level · Team size: 1-5 · Preferred mode: Live Online</p>\n           <p>Interested in upcoming schedule for Advanced Level.</p>",
+    "delivered": false,
+    "reason": "SMTP not configured",
+    "loggedAt": "2026-08-12T06:44:24.561Z"
+  },
+  {
+    "to": "admin@baselineskills.com",
+    "from": "Baseline Skills <no-reply@baselineskills.com>",
+    "subject": "New registration — IREB CPRE Foundation Level (Alex Johnson)",
+    "html": "<h2>New course registration</h2>\n      <p><strong>Alex Johnson</strong> (alex.j@example.com) registered for <strong>IREB CPRE Foundation Level</strong>.</p>\n      <ul>\n        <li>Company: Innovate Mobility</li>\n        <li>Role: Systems Architect</li>\n        <li>Session: 2026-09-15 (Live Online)</li>\n        <li>Amount: USD 764.15</li>\n        <li>Status: invoice_pending</li>\n      </ul>\n      <p><em>Payment processing isn't fully configured on this instance yet — this registration has been recorded as invoice-pending. Set PADDLE_API_KEY and PADDLE_CLIENT_TOKEN to enable live card payments via Paddle.</em></p>",
+    "delivered": false,
+    "reason": "SMTP not configured",
+    "loggedAt": "2026-08-12T06:44:24.576Z"
+  },
+  {
+    "to": "alex.j@example.com",
+    "from": "Baseline Skills <no-reply@baselineskills.com>",
+    "subject": "You're registered — IREB CPRE Foundation Level",
+    "html": "<h2>Thanks for registering, Alex Johnson!</h2>\n      <p>You're booked on <strong>IREB CPRE Foundation Level</strong>.</p>\n      <ul>\n        <li>Session: 2026-09-15</li>\n        <li>Delivery mode: Live Online</li>\n        <li>Amount: USD 764.15</li>\n      </ul>\n      <p><em>Payment processing isn't fully configured on this instance yet — this registration has been recorded as invoice-pending. Set PADDLE_API_KEY and PADDLE_CLIENT_TOKEN to enable live card payments via Paddle.</em></p>\n      <p>We'll be in touch with joining instructions closer to the session date.</p>\n      <p>— The Baseline Skills team</p>",
+    "delivered": false,
+    "reason": "SMTP not configured",
+    "loggedAt": "2026-08-12T06:44:24.577Z"
+  },
+  {
+    "to": "admin@baselineskills.com",
+    "from": "Baseline Skills <no-reply@baselineskills.com>",
+    "subject": "New corporate training inquiry — <img src=x onerror=alert(1)>Acme",
+    "html": "<p><strong>&lt;script&gt;alert(&#39;XSS&#39;)&lt;/script&gt;Acme Lead</strong> at <strong>&lt;img src=x onerror=alert(1)&gt;Acme</strong> (training@acme.example, 555-0199) requested corporate training info.</p>\n           <p>Team size: 15-25</p>\n           <p>Message: &lt;b&gt;Bold message&lt;/b&gt;</p>",
+    "delivered": false,
+    "reason": "SMTP not configured",
+    "loggedAt": "2026-08-12T07:04:16.311Z"
+  },
+  {
+    "to": "admin@baselineskills.com",
+    "from": "Baseline Skills <no-reply@baselineskills.com>",
+    "subject": "New contact form message — Jane Smith",
+    "html": "<p><strong>Jane Smith</strong> (jane@example.com) sent a message.</p>\n           <p>Company: Tech Solutions · Role: Lead Requirements Engineer · Course interest: IREB CPRE Advanced Level · Team size: 1-5 · Preferred mode: Live Online</p>\n           <p>Interested in upcoming schedule for Advanced Level.</p>",
+    "delivered": false,
+    "reason": "SMTP not configured",
+    "loggedAt": "2026-08-12T07:04:16.321Z"
+  },
+  {
+    "to": "admin@baselineskills.com",
+    "from": "Baseline Skills <no-reply@baselineskills.com>",
+    "subject": "New registration — IREB CPRE Foundation Level (Alex Johnson)",
+    "html": "<h2>New course registration</h2>\n      <p><strong>Alex Johnson</strong> (alex.j@example.com) registered for <strong>IREB CPRE Foundation Level</strong>.</p>\n      <ul>\n        <li>Company: Innovate Mobility</li>\n        <li>Role: Systems Architect</li>\n        <li>Session: 2026-09-15 (Live Online)</li>\n        <li>Amount: USD 764.15</li>\n        <li>Status: invoice_pending</li>\n      </ul>\n      <p><em>Payment processing isn't fully configured on this instance yet — this registration has been recorded as invoice-pending. Set PADDLE_API_KEY and PADDLE_CLIENT_TOKEN to enable live card payments via Paddle.</em></p>",
+    "delivered": false,
+    "reason": "SMTP not configured",
+    "loggedAt": "2026-08-12T07:04:16.340Z"
+  },
+  {
+    "to": "alex.j@example.com",
+    "from": "Baseline Skills <no-reply@baselineskills.com>",
+    "subject": "You're registered — IREB CPRE Foundation Level",
+    "html": "<h2>Thanks for registering, Alex Johnson!</h2>\n      <p>You're booked on <strong>IREB CPRE Foundation Level</strong>.</p>\n      <ul>\n        <li>Session: 2026-09-15</li>\n        <li>Delivery mode: Live Online</li>\n        <li>Amount: USD 764.15</li>\n      </ul>\n      <p><em>Payment processing isn't fully configured on this instance yet — this registration has been recorded as invoice-pending. Set PADDLE_API_KEY and PADDLE_CLIENT_TOKEN to enable live card payments via Paddle.</em></p>\n      <p>We'll be in touch with joining instructions closer to the session date.</p>\n      <p>— The Baseline Skills team</p>",
+    "delivered": false,
+    "reason": "SMTP not configured",
+    "loggedAt": "2026-08-12T07:04:16.341Z"
+  }
+]

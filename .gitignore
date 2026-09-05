@@ -1,0 +1,7 @@
+node_modules/
+.env
+*.log
+
+# Admin-uploaded brochure PDFs — user content, not source; keep out of git
+# (the folder is created automatically at startup if missing).
+public/uploads/

@@ -1,0 +1,57 @@
+<%- include('partials/header') %>
+
+<section class="section-tight" style="background:#fff;border-bottom:1px solid var(--line)">
+  <div class="container">
+    <span class="eyebrow">Register</span>
+    <h1 style="font-size:1.9rem">Register for <%= course.title %></h1>
+    <p class="lead">Session details and payment on the next step.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="max-width:760px">
+    <% if (typeof error !== 'undefined' && error) { %><div class="alert alert-error"><%= error %></div><% } %>
+
+    <div class="grid-2" style="align-items:start">
+      <form method="POST" action="/courses/<%= course.slug %>/register" class="card" style="grid-column:1">
+        <div class="form-row">
+          <div class="form-field"><label>Full name *</label><input type="text" name="name" required value="<%= typeof form!=='undefined' ? form.name||'' : '' %>"></div>
+          <div class="form-field"><label>Email *</label><input type="email" name="email" required value="<%= typeof form!=='undefined' ? form.email||'' : '' %>"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-field"><label>Company</label><input type="text" name="company"></div>
+          <div class="form-field"><label>Role</label><input type="text" name="role"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Preferred session</label>
+            <select name="sessionStartDate">
+              <% course.sessions.forEach(s => { %><option value="<%= s.startDate %>"><%= s.startDate %> — <%= s.mode %></option><% }) %>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Delivery mode</label>
+            <select name="deliveryMode">
+              <% course.deliveryModes.forEach(m => { %><option value="<%= m %>"><%= m %></option><% }) %>
+            </select>
+          </div>
+        </div>
+        <div class="form-field"><label>Notes (optional)</label><textarea name="notes" rows="3"></textarea></div>
+        <button type="submit" class="btn btn-gold btn-block btn-lg">Continue to Payment</button>
+        <p class="form-hint" style="text-align:center;margin-top:10px">You'll get an email confirmation immediately after registering.</p>
+      </form>
+
+      <div class="sticky-card" style="grid-column:2">
+        <h4 style="margin-top:0"><%= course.title %></h4>
+        <p style="font-size:.85rem;color:var(--muted)"><%= course.durationDays %> day<%= course.durationDays>1?'s':'' %> &middot; <%= course.category %></p>
+        <div class="price-row" style="margin-top:16px">
+          <div class="price-now">$<%= (finalPrice/100).toFixed(2) %></div>
+          <% if(course.discountPercent){ %><div class="price-was">$<%= (course.priceCents/100).toFixed(2) %></div><% } %>
+        </div>
+        <% if(course.discountPercent){ %><span class="discount-badge"><%= course.discountPercent %>% OFF applied</span><% } %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

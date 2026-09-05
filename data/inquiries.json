@@ -1,0 +1,74 @@
+[
+  {
+    "id": "inq_1786517040998_23c94622",
+    "type": "corporate-training",
+    "name": "Acme Corp Lead",
+    "company": "Acme Industries",
+    "email": "training@acme.example",
+    "phone": "555-0199",
+    "teamSize": "15-25",
+    "message": "We need an in-house CPRE training session for our systems team.",
+    "createdAt": "2026-08-12T06:44:00.998Z"
+  },
+  {
+    "id": "contact_1786517041005_d7a335eb",
+    "type": "contact",
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "company": "Tech Solutions",
+    "role": "Lead Requirements Engineer",
+    "courseInterest": "IREB CPRE Advanced Level",
+    "teamSize": "1-5",
+    "deliveryMode": "Live Online",
+    "message": "Interested in upcoming schedule for Advanced Level.",
+    "createdAt": "2026-08-12T06:44:01.005Z"
+  },
+  {
+    "id": "inq_1786517064556_794c6804",
+    "type": "corporate-training",
+    "name": "Acme Corp Lead",
+    "company": "Acme Industries",
+    "email": "training@acme.example",
+    "phone": "555-0199",
+    "teamSize": "15-25",
+    "message": "We need an in-house CPRE training session for our systems team.",
+    "createdAt": "2026-08-12T06:44:24.556Z"
+  },
+  {
+    "id": "contact_1786517064561_a103b57b",
+    "type": "contact",
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "company": "Tech Solutions",
+    "role": "Lead Requirements Engineer",
+    "courseInterest": "IREB CPRE Advanced Level",
+    "teamSize": "1-5",
+    "deliveryMode": "Live Online",
+    "message": "Interested in upcoming schedule for Advanced Level.",
+    "createdAt": "2026-08-12T06:44:24.561Z"
+  },
+  {
+    "id": "inq_1786518256310_76305dff",
+    "type": "corporate-training",
+    "name": "<script>alert('XSS')</script>Acme Lead",
+    "company": "<img src=x onerror=alert(1)>Acme",
+    "email": "training@acme.example",
+    "phone": "555-0199",
+    "teamSize": "15-25",
+    "message": "<b>Bold message</b>",
+    "createdAt": "2026-08-12T07:04:16.310Z"
+  },
+  {
+    "id": "contact_1786518256320_41d83930",
+    "type": "contact",
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "company": "Tech Solutions",
+    "role": "Lead Requirements Engineer",
+    "courseInterest": "IREB CPRE Advanced Level",
+    "teamSize": "1-5",
+    "deliveryMode": "Live Online",
+    "message": "Interested in upcoming schedule for Advanced Level.",
+    "createdAt": "2026-08-12T07:04:16.320Z"
+  }
+]
