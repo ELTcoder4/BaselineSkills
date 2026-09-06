@@ -268,14 +268,23 @@ p {
 
 /* Top Header & Navigation */
 .site-header {
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 100;
+  isolation: isolate;
+  width: 100%;
   background: rgba(248, 250, 252, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(226, 232, 240, 0.85);
   transition: all .25s ease
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-header {
+    background: rgba(248, 250, 252, 0.98);
+  }
 }
 
 .nav-wrapper {

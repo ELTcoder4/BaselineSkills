@@ -173,11 +173,37 @@ function handleBrandClick(e, targetUrl) {
   }, 220);
 }
 
+let scrollLockY = 0;
+
+function lockBodyScroll() {
+  // NOTE: we intentionally avoid `document.body.style.overflow = 'hidden'`.
+  // The header uses `position: sticky`, and body is its scrolling ancestor —
+  // setting overflow:hidden on body breaks sticky positioning (a well-known
+  // CSS quirk), causing the header to jump, unstick, or overlap content
+  // after the modal opens/closes. Freezing scroll via `position: fixed`
+  // instead avoids touching `overflow` on any header ancestor.
+  scrollLockY = window.scrollY || document.documentElement.scrollTop || 0;
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${scrollLockY}px`;
+  document.body.style.left = '0';
+  document.body.style.right = '0';
+  document.body.style.width = '100%';
+}
+
+function unlockBodyScroll() {
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.left = '';
+  document.body.style.right = '';
+  document.body.style.width = '';
+  window.scrollTo(0, scrollLockY);
+}
+
 function openExpertModal() {
   const modal = document.getElementById('expert-modal');
   modal.classList.add('active');
   modal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
+  lockBodyScroll();
   setTimeout(() => {
     const firstInput = document.getElementById('modal-name');
     if (firstInput) firstInput.focus();
@@ -188,7 +214,7 @@ function closeExpertModal() {
   const modal = document.getElementById('expert-modal');
   modal.classList.remove('active');
   modal.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
+  unlockBodyScroll();
 }
 
 function handleModalBackdropClick(e) {
