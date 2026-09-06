@@ -268,18 +268,9 @@ p {
 
 /* Top Header & Navigation */
 .site-header {
-<<<<<<< HEAD
-  position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 100;
-  isolation: isolate;
-  width: 100%;
-=======
-  position: sticky;
-  top: 0;
-  z-index: 100;
->>>>>>> dcdaf6e31f180310fe125ebc397204ccc6bfd9b3
   background: rgba(248, 250, 252, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -287,15 +278,6 @@ p {
   transition: all .25s ease
 }
 
-<<<<<<< HEAD
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .site-header {
-    background: rgba(248, 250, 252, 0.98);
-  }
-}
-
-=======
->>>>>>> dcdaf6e31f180310fe125ebc397204ccc6bfd9b3
 .nav-wrapper {
   display: flex;
   align-items: center;
@@ -5232,8 +5214,4 @@ footer.site-footer {
   .form-studio-card {
     padding: 20px !important;
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> dcdaf6e31f180310fe125ebc397204ccc6bfd9b3
